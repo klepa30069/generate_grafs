@@ -1,0 +1,172 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="Страница — 1" id="VnM2_U6Spcusokh6g4sE">
+    <mxGraphModel dx="794" dy="1688" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vFmYI3a54i5pBgdLu5io-1" value="1 задача ЕГЭ&lt;div&gt;Генерация задачи - возвращает матрицу&lt;/div&gt;&lt;div&gt;Решение задачи - возвращает текст решения&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="80" y="40" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-2" value="4 задача ОГЭ&lt;div&gt;Генерация задачи - возвращает матрицу&lt;/div&gt;&lt;div&gt;Решение задачи - возвращает текст решения&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="280" y="40" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-3" value="9 задача ОГЭ&lt;div&gt;Генерация задачи - возвращает матрицу&lt;/div&gt;&lt;div&gt;Решение задачи - возвращает текст решения&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="480" y="40" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-5" value="Фронт&lt;div&gt;Получает матрицу для отображения задания&lt;/div&gt;&lt;div&gt;Получает решение и отображает текст решения&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="240" y="240" width="240" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-7" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-1" target="vFmYI3a54i5pBgdLu5io-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="300" as="sourcePoint" />
+            <mxPoint x="430" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-8" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-3" target="vFmYI3a54i5pBgdLu5io-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="210" as="sourcePoint" />
+            <mxPoint x="310" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-9" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-2" target="vFmYI3a54i5pBgdLu5io-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="220" as="sourcePoint" />
+            <mxPoint x="320" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-10" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="440" width="390" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-11" value="1 задача ЕГЭ" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="90" y="450" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-12" value="4 задача О&lt;span style=&quot;background-color: initial;&quot;&gt;ГЭ&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="220" y="450" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-13" value="9 задача ОГЭ" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="350" y="450" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-14" value="Теория" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="350" y="680" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-16" value="Отображение задания" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="90" y="490" width="370" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-17" value="Поле ввода ответа" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="90" y="650" width="370" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-18" value="Ответить" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="90" y="680" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-19" value="Показать решение" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="220" y="680" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-20" value="Отображение решения" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="90" y="720" width="370" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-21" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="440" width="530" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-22" value="1 задача ЕГЭ" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="920" y="450" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-23" value="4 задача О&lt;span style=&quot;background-color: initial;&quot;&gt;ГЭ&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="660" y="450" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-24" value="9 задача ОГЭ" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="790" y="450" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-25" value="Теория" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="450" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-26" value="Отображение задания" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="490" width="510" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-27" value="Поле ввода ответа" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="650" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-28" value="Ответить" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="790" y="645" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-29" value="Показать решение" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="920" y="645" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-30" value="Отображение решения" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="680" width="510" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-31" value="1 задача ЕГЭ&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Решение задачи - возвращает текст решения&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="170" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-32" value="4 задача ОГЭ&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Решение задачи - возвращает текст решения&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="170" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-33" value="9 задача ОГЭ&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Решение задачи - возвращает текст решения&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="1390" y="170" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-34" value="Фронт&lt;div&gt;Получает матрицу для отображения задания&lt;/div&gt;&lt;div&gt;Получает решение и отображает текст решения&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1180" y="500" width="240" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-35" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-31" target="vFmYI3a54i5pBgdLu5io-44" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1320" y="430" as="sourcePoint" />
+            <mxPoint x="1160" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-36" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-33" target="vFmYI3a54i5pBgdLu5io-44" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1110" y="340" as="sourcePoint" />
+            <mxPoint x="1440" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-37" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-32" target="vFmYI3a54i5pBgdLu5io-44" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1120" y="350" as="sourcePoint" />
+            <mxPoint x="1300" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-38" value="&lt;div&gt;Генерация задачи - возвращает матрицу&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="-20" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-39" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-44" target="vFmYI3a54i5pBgdLu5io-38" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1240" y="390" as="sourcePoint" />
+            <mxPoint x="1380" y="260" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1240" y="340" />
+              <mxPoint x="1210" y="340" />
+              <mxPoint x="1210" y="160" />
+              <mxPoint x="1260" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-40" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-38" target="vFmYI3a54i5pBgdLu5io-31" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1330" y="310" as="sourcePoint" />
+            <mxPoint x="1380" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-41" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-38" target="vFmYI3a54i5pBgdLu5io-32" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1230" y="110" as="sourcePoint" />
+            <mxPoint x="1110" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-42" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-38" target="vFmYI3a54i5pBgdLu5io-33" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1240" y="120" as="sourcePoint" />
+            <mxPoint x="1120" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-44" value="Контролер без БД" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1181" y="380" width="239" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vFmYI3a54i5pBgdLu5io-45" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="vFmYI3a54i5pBgdLu5io-44" target="vFmYI3a54i5pBgdLu5io-34" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1030" y="420" as="sourcePoint" />
+            <mxPoint x="1080" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
