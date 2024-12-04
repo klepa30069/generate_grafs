@@ -34,7 +34,8 @@ class Interface:
     def __add_second_block(self) -> None:
         # Создание второго блока
         # Поле отображения задания
-        self.__task_display = QLabel("Отображение задания")
+        # TODO нормальное отображение задачи
+        self.__task_display = QLabel(f'{self.__task.get_text_task()} {self.__task.get_matrix_task()}')
         self.__task_display.setFrameStyle(QFrame.Panel | QFrame.Sunken)
         self.__task_display.setAlignment(Qt.AlignCenter)
 
@@ -67,7 +68,8 @@ class Interface:
     def __add_third_block(self) -> None:
         # Создание третьего блока
         # Поле отображения решения
-        self.__solution_display = QLabel("Отображение решения")
+        # TODO нормальное отображение решения
+        self.__solution_display = QLabel(self.__task.get_solving_task())
         self.__solution_display.setFrameStyle(QFrame.Panel | QFrame.Sunken)
         self.__solution_display.setAlignment(Qt.AlignCenter)
 
@@ -99,7 +101,8 @@ class Interface:
             self.__answer_click = False
             self.__answer_input.setText('')
             self.__answer_input.setStyleSheet("background-color: white")
-            self.__task_display.setText(f'Новый текст {type_task}')
+            # TODO нормальное отображение задачи
+            self.__task_display.setText(f'{self.__task.get_text_task()} {self.__task.get_matrix_task()}')
 
     def click_button_1task(self) -> None:
         self.__click_button_task(1)
@@ -119,7 +122,7 @@ class Interface:
         if not answer.isnumeric():
             self.__answer_input.setStyleSheet("background-color: red")
         else:
-            if self.__task.get_ans_task() == answer:
+            if self.__task.get_ans_task() == int(answer):
                 self.__answer_input.setStyleSheet("background-color: green")
             else:
                 self.__answer_input.setStyleSheet("background-color: red")
