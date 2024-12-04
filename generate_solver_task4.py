@@ -3,7 +3,8 @@ from generate_solver import Generate_Solver
 import random
 import heapq
 
-class Generate_Solver_Task4():
+
+class Generate_Solver_Task4:
     __text_task: str
     __matrix_task: list[list[int]]
     __solving_task: str
@@ -11,18 +12,8 @@ class Generate_Solver_Task4():
 
     __num_for_letter = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'H', 7: 'G', 8: 'K', 9: 'M', 10: 'N'}
 
-
-class Generate_Solver_Task4:
     def get_task(self) -> Generate_Solver:
-        return Generate_Solver('таск', [
-            [0, 1, 2, 3],
-            [1, 0, 0, 4],
-            [2, 0, 0, 1],
-            [3, 4, 1, 0]
-        ], 'решение', 6)
-
-    def __text_task(self) -> str:
-        pass
+        return Generate_Solver(self.__text_task, self.__matrix_task, self.__solving_task, self.__ans_task)
 
     def __init__(self) -> None:
         # Создаёт по методам объект класса
@@ -32,7 +23,6 @@ class Generate_Solver_Task4:
         # TODO ЮРА генерит условие
         self.__generate_text_task(num_end + 1)
         self.__dijkstra(self.__matrix_task, 0, num_end)
-
 
     # Для безопасного вывода полей объекта класса
     def get_text_task(self) -> str:
@@ -46,7 +36,6 @@ class Generate_Solver_Task4:
 
     def get_ans_task(self) -> int:
         return self.__ans_task
-
 
     # Вспомогательные алгоритмы
     def __generate_matrix(self):
@@ -80,7 +69,7 @@ class Generate_Solver_Task4:
         # Добавляем дополнительные рёбра с вероятностью, чтобы увеличить плотность
         for i in range(num_vertices):
             for j in range(i + 1, num_vertices):
-                if num_vertices == 4:                               # Для 4-х вершин заполняем все рёбра
+                if num_vertices == 4:  # Для 4-х вершин заполняем все рёбра
                     if matrix[i][j] == 0:
                         weight = random.randint(2, max_weight_edge)
                         matrix[i][j] = weight
@@ -108,8 +97,8 @@ class Generate_Solver_Task4:
         str_vertex = str_vertex[:-2]
 
         self.__text_task = (
-                    f'Между населенными пунктами {str_vertex} построены дороги, протяженность которых (в километрах) приведена в таблице:\n' +
-                    f'Определите длину кратчайшего пути между пунктами {self.__num_for_letter[0]} и {self.__num_for_letter[count - 1]} - первым и последним). Передвигаться можно только по дорогам, протяженность которых указана в таблице.')
+                f'Между населенными пунктами {str_vertex} построены дороги, протяженность которых (в километрах) приведена в таблице:\n' +
+                f'Определите длину кратчайшего пути между пунктами {self.__num_for_letter[0]} и {self.__num_for_letter[count - 1]} - первым и последним). Передвигаться можно только по дорогам, протяженность которых указана в таблице.')
 
     def __dijkstra(self, graph, start, end):
         # Инициализация
@@ -155,16 +144,3 @@ class Generate_Solver_Task4:
         path_str = path_str[:-4]
         self.__solving_task = path_str
 
-
-if __name__ == '__main__':
-    new_task4 = Generate_Solver_Task4()
-    print(new_task4.get_text_task())
-    print('-' * 50)
-    new_matrix_task = new_task4.get_matrix_task()
-    for row in new_matrix_task:
-        print(row)
-    # print(new_task4.get_matrix_task())
-    print('-' * 50)
-    print(new_task4.get_solving_task())
-    print('-' * 50)
-    print(new_task4.get_ans_task())
