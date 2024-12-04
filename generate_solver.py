@@ -1,15 +1,22 @@
 class Generate_Solver:
-    def __init__(self) -> None:
-        pass
+    __text_task: str
+    __matrix_task: list[list[int]]
+    __solving: str
 
-    def get_text_task(self, type_task: int) -> str:
-        pass
+    def __init__(self, text_task: str, matrix_task: list[list[int]], solving: str, ans: int) -> None:
+        self.__text_task = text_task
+        self.__matrix_task = matrix_task
+        self.__solving = solving
+        self.__ans = ans
 
-    def get_matrix_task(self, type_task: int) -> list[list[int]]:
-        pass
+    def get_text_task(self) -> str:
+        return self.__text_task
 
-    def get_solving_task(self, type_task: int) -> str:
-        pass
+    def get_matrix_task(self) -> list[list[int]]:
+        return self.__matrix_task
 
-    def get_ans_task(self, type_task: int) -> int:
-        pass
+    def get_solving_task(self) -> str:
+        return self.__solving
+
+    def get_ans_task(self) -> int:
+        return self.__ans
