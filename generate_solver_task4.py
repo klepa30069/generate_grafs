@@ -24,21 +24,8 @@ class Generate_Solver_Task4:
         self.__generate_text_task(num_end + 1)
         self.__dijkstra(self.__matrix_task, 0, num_end)
 
-    # Для безопасного вывода полей объекта класса
-    def get_text_task(self) -> str:
-        return self.__text_task
-
-    def get_matrix_task(self) -> list[list[int]]:
-        return self.__matrix_task
-
-    def get_solving_task(self) -> str:
-        return self.__solving_task
-
-    def get_ans_task(self) -> int:
-        return self.__ans_task
-
     # Вспомогательные алгоритмы
-    def __generate_matrix(self):
+    def __generate_matrix(self) -> None:
         # Максимальное значение веса ребра
         max_weight_edge = 10
 
@@ -90,7 +77,7 @@ class Generate_Solver_Task4:
         self.__matrix_task = matrix
 
     # TODO Генерирует только из первой в последнюю
-    def __generate_text_task(self, count):
+    def __generate_text_task(self, count: int) -> None:
         str_vertex = ''
         for i in range(count):
             str_vertex += self.__num_for_letter[i] + ', '
@@ -100,7 +87,7 @@ class Generate_Solver_Task4:
                 f'Между населенными пунктами {str_vertex} построены дороги, протяженность которых (в километрах) приведена в таблице:\n' +
                 f'Определите длину кратчайшего пути между пунктами {self.__num_for_letter[0]} и {self.__num_for_letter[count - 1]} - первым и последним). Передвигаться можно только по дорогам, протяженность которых указана в таблице.')
 
-    def __dijkstra(self, graph, start, end):
+    def __dijkstra(self, graph: list[list[int]], start: int, end: int) -> None:
         # Инициализация
         n = len(graph)
         distances = [float('inf')] * n  # Заполнение массива бесконечностями
@@ -143,4 +130,3 @@ class Generate_Solver_Task4:
             # path_str += str(numb) + ' -> '
         path_str = path_str[:-4]
         self.__solving_task = path_str
-
