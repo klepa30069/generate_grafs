@@ -35,7 +35,7 @@ class Interface:
         # Создание второго блока
         # Поле отображения задания
         # TODO нормальное отображение задачи
-        self.__task_display = QLabel(f'{self.__task.get_text_task()} {self.__task.get_matrix_task()}')
+        self.__task_display = QLabel(f'{self.__task.get_text_task()}\n{self.__task.get_matrix_task()}')
         self.__task_display.setFrameStyle(QFrame.Panel | QFrame.Sunken)
         self.__task_display.setAlignment(Qt.AlignCenter)
 
@@ -102,7 +102,7 @@ class Interface:
             self.__answer_input.setText('')
             self.__answer_input.setStyleSheet("background-color: white")
             # TODO нормальное отображение задачи
-            self.__task_display.setText(f'{self.__task.get_text_task()} {self.__task.get_matrix_task()}')
+            self.__task_display.setText(f'{self.__task.get_text_task()}\n{self.__task.get_matrix_task()}')
 
     def click_button_1task(self) -> None:
         self.__click_button_task(1)
