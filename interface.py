@@ -1,3 +1,5 @@
+from PyQt5.QtGui import QPixmap, QPainter
+
 from controller import Controller
 from generate_solver import Generate_Solver
 from PyQt5.QtCore import Qt
@@ -20,7 +22,9 @@ class Interface:
     __window: QWidget
     __main_layout: QVBoxLayout
     __answer_input: QLineEdit
-    __task_display: QLabel
+    __task_display_1: QLabel
+    __image_label: QLabel
+    __task_display_2: QLabel
     __solution_display: QLabel
 
     def __init__(self) -> None:
@@ -31,13 +35,48 @@ class Interface:
         self.__show_third_block = False
         self.__answer_click = False
 
-    def __add_second_block(self) -> None:
+    def __add_second_block(self, type_task: int) -> None:
         # Создание второго блока
-        # Поле отображения задания
-        # TODO нормальное отображение задачи
-        self.__task_display = QLabel(f'{self.__task.get_text_task()}\n{self.__task.get_matrix_task()}')
-        self.__task_display.setFrameStyle(QFrame.Panel | QFrame.Sunken)
-        self.__task_display.setAlignment(Qt.AlignCenter)
+        # Поля отображения задания
+        self.__task_display_1 = QLabel(self.__task.get_text_task().split('\n')[0])
+        self.__task_display_1.setWordWrap(True)
+        self.__task_display_1.setAlignment(Qt.AlignCenter)
+
+        # Горизонтальный лейаут для таблицы и изображения
+        image_layout = QHBoxLayout()
+
+        # Добавление изображения
+        self.__image_label = QLabel()
+
+        # Добавление картинок
+        if type_task == 4:
+            table_pixmap = QPixmap(self.__task.get_image_matrix())
+            self.__image_label.setPixmap(table_pixmap)
+        elif type_task == 9:
+            graf_pixmap = QPixmap(self.__task.get_image_graf())
+            self.__image_label.setPixmap(graf_pixmap)
+        else:
+            table_pixmap = QPixmap(self.__task.get_image_matrix())
+            graf_pixmap = QPixmap(self.__task.get_image_graf())
+
+            # Создание нового изображения, чтобы разместить оба изображения
+            combined_width = table_pixmap.width() + graf_pixmap.width()
+            combined_height = max(table_pixmap.height(), graf_pixmap.height())
+            combined_pixmap = QPixmap(combined_width, combined_height)
+            combined_pixmap.fill(Qt.white)  # Заполнение фона
+
+            # Рисуем оба изображения на новом QPixmap
+            painter = QPainter(combined_pixmap)
+            painter.drawPixmap(0, 0, table_pixmap)
+            painter.drawPixmap(table_pixmap.width(), 0, graf_pixmap)
+            painter.end()
+            self.__image_label.setPixmap(combined_pixmap)
+        self.__image_label.setAlignment(Qt.AlignCenter)
+        image_layout.addWidget(self.__image_label)
+
+        self.__task_display_2 = QLabel(self.__task.get_text_task().split('\n')[1])
+        self.__task_display_2.setWordWrap(True)
+        self.__task_display_2.setAlignment(Qt.AlignCenter)
 
         # Средняя панель с полем ввода и кнопками
         self.__answer_input = QLineEdit()
@@ -50,7 +89,9 @@ class Interface:
 
         # Создание отображения второго блока
         center_layout = QVBoxLayout()
-        center_layout.addWidget(self.__task_display)
+        center_layout.addWidget(self.__task_display_1)
+        center_layout.addLayout(image_layout)
+        center_layout.addWidget(self.__task_display_2)
         middle_layout = QHBoxLayout()
         middle_layout.addWidget(self.__answer_input)
         middle_layout.addWidget(button_answer)
@@ -62,15 +103,15 @@ class Interface:
 
         # Изменение размера окна
         self.__show_second_block = True
-        self.__height = 350
+        self.__height = 500
         self.__window.setFixedHeight(self.__height)
+        self.__window.move(self.__window.pos().x(), self.__window.pos().y() - 250)
 
     def __add_third_block(self) -> None:
         # Создание третьего блока
         # Поле отображения решения
-        # TODO нормальное отображение решения
         self.__solution_display = QLabel(self.__task.get_solving_task())
-        self.__solution_display.setFrameStyle(QFrame.Panel | QFrame.Sunken)
+        self.__solution_display.setWordWrap(True)
         self.__solution_display.setAlignment(Qt.AlignCenter)
 
         # Создание отображения третьего блока
@@ -82,27 +123,57 @@ class Interface:
 
         # Изменение размера окна
         self.__show_third_block = True
-        self.__height = 600
+        self.__height = 700
         self.__window.setFixedHeight(self.__height)
+        self.__window.move(self.__window.pos().x(), self.__window.pos().y() - 50)
 
     def __click_button_task(self, type_task: int) -> None:
         if not self.__show_second_block:
             self.__task = Controller().get_new_task(type_task)
-            self.__add_second_block()
+            self.__add_second_block(type_task)
         elif self.__answer_click:
             self.__task = Controller().get_new_task(type_task)
-            self.__show_third_block = False
-            self.__solution_display.hide()
+            if self.__show_third_block:
+                self.__show_third_block = False
+                self.__solution_display.hide()
 
             # Изменение размера окна
-            self.__height = 350
+            self.__height = 500
             self.__window.setFixedHeight(self.__height)
+            self.__window.move(self.__window.pos().x(), self.__window.pos().y() + 50)
 
             self.__answer_click = False
             self.__answer_input.setText('')
             self.__answer_input.setStyleSheet("background-color: white")
-            # TODO нормальное отображение задачи
-            self.__task_display.setText(f'{self.__task.get_text_task()}\n{self.__task.get_matrix_task()}')
+
+            # нормальное отображение задачи
+            self.__task_display_1.setText(self.__task.get_text_task().split('\n')[0])
+
+            # Добавление картинок
+            if type_task == 4:
+                table_pixmap = QPixmap(self.__task.get_image_matrix())
+                self.__image_label.setPixmap(table_pixmap)
+            elif type_task == 9:
+                graf_pixmap = QPixmap(self.__task.get_image_graf())
+                self.__image_label.setPixmap(graf_pixmap)
+            else:
+                table_pixmap = QPixmap(self.__task.get_image_matrix())
+                graf_pixmap = QPixmap(self.__task.get_image_graf())
+
+                # Создание нового изображения, чтобы разместить оба изображения
+                combined_width = table_pixmap.width() + graf_pixmap.width()
+                combined_height = max(table_pixmap.height(), graf_pixmap.height())
+                combined_pixmap = QPixmap(combined_width, combined_height)
+                combined_pixmap.fill(Qt.white)  # Заполнение фона
+
+                # Рисуем оба изображения на новом QPixmap
+                painter = QPainter(combined_pixmap)
+                painter.drawPixmap(0, 0, table_pixmap)
+                painter.drawPixmap(table_pixmap.width(), 0, graf_pixmap)
+                painter.end()
+                self.__image_label.setPixmap(combined_pixmap)
+
+            self.__task_display_2.setText(self.__task.get_text_task().split('\n')[1])
 
     def click_button_1task(self) -> None:
         self.__click_button_task(1)

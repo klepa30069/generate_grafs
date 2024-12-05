@@ -9,11 +9,14 @@ class Generate_Solver_Task4:
     __matrix_task: list[list[int]]
     __solving_task: str
     __ans_task: int
+    __names_vertex: list[str]
 
     __num_for_letter = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'H', 7: 'G', 8: 'K', 9: 'M', 10: 'N'}
 
     def get_task(self) -> Generate_Solver:
-        return Generate_Solver(self.__text_task, self.__matrix_task, self.__solving_task, self.__ans_task)
+        return Generate_Solver(self.__text_task, self.__matrix_task,
+                               self.__names_vertex, self.__solving_task,
+                               self.__ans_task)
 
     def __init__(self) -> None:
         # Создаёт по методам объект класса
@@ -69,7 +72,7 @@ class Generate_Solver_Task4:
 
         # Добавляем вероятность соединения первой вершины с последней с большим весом
         if matrix[num_vertices - 1][0] != 0:
-            weight = random.randint(max_weight_edge + 1, max_weight_edge * 2)
+            weight = random.randint((max_weight_edge // 2) * num_vertices, max_weight_edge * 3 + 1)
             matrix[num_vertices - 1][0] = weight
             matrix[0][num_vertices - 1] = weight
 
@@ -79,13 +82,15 @@ class Generate_Solver_Task4:
     # TODO Генерирует только из первой в последнюю
     def __generate_text_task(self, count: int) -> None:
         str_vertex = ''
+        self.__names_vertex = []
         for i in range(count):
             str_vertex += self.__num_for_letter[i] + ', '
+            self.__names_vertex.append(self.__num_for_letter[i])
         str_vertex = str_vertex[:-2]
 
         self.__text_task = (
                 f'Между населенными пунктами {str_vertex} построены дороги, протяженность которых (в километрах) приведена в таблице:\n' +
-                f'Определите длину кратчайшего пути между пунктами {self.__num_for_letter[0]} и {self.__num_for_letter[count - 1]} - первым и последним.\n' +
+                f'Определите длину кратчайшего пути между пунктами {self.__num_for_letter[0]} и {self.__num_for_letter[count - 1]} - первым и последним. ' +
                 'Передвигаться можно только по дорогам, протяженность которых указана в таблице.')
 
     def __dijkstra(self, graph: list[list[int]], start: int, end: int) -> None:
