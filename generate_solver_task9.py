@@ -10,7 +10,12 @@ class Generate_Solver_Task9:
     __num_for_letter = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'H', 7: 'G', 8: 'K', 9: 'M', 10: 'N', 11: 'L'}
 
     def get_task(self) -> Generate_Solver:
-        return Generate_Solver(self.__text_task, self.__matrix_task, self.__solving_task, self.__ans_task)
+        return Generate_Solver('таск9', [
+            [0, 1, 2, 3],
+            [1, 0, 0, 4],
+            [2, 0, 0, 1],
+            [3, 4, 1, 0]
+        ], 'решение', 6)
 
     def __init__(self) -> None:
         pass

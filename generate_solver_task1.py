@@ -3,7 +3,7 @@ from generate_solver import Generate_Solver
 
 class Generate_Solver_Task1:
     def get_task(self) -> Generate_Solver:
-        return Generate_Solver('таск', [
+        return Generate_Solver('таск1', [
             [0, 1, 2, 3],
             [1, 0, 0, 4],
             [2, 0, 0, 1],
