@@ -201,7 +201,6 @@ class Interface:
                 subprocess.run(['xdg-open', pdf_path])
         else:
             print(f"Файл {pdf_path} не найден.")
-        pass
 
     def click_button_answer(self) -> None:
         self.__answer_click = True
