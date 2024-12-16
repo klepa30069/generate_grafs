@@ -2,10 +2,10 @@ from PyQt5.QtGui import QPixmap, QPainter
 
 from controller import Controller
 from generate_solver import Generate_Solver
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import (
     QApplication, QVBoxLayout, QHBoxLayout,
-    QPushButton, QLabel, QLineEdit, QWidget, QFrame
+    QPushButton, QLabel, QLineEdit, QWidget, QFrame, QMessageBox
 )
 import sys
 import subprocess
@@ -36,6 +36,7 @@ class Interface:
         self.__show_second_block = False
         self.__show_third_block = False
         self.__answer_click = False
+        self.__message_label = None  # Новый атрибут для надписи с сообщением
 
     def __add_second_block(self, type_task: int) -> None:
         # Создание второго блока
@@ -199,8 +200,23 @@ class Interface:
                 subprocess.run(['open', pdf_path])
             else:  # Для Linux и других систем
                 subprocess.run(['xdg-open', pdf_path])
+            self.__show_popup_message() # Создаём всплывающее сообщение
         else:
             print(f"Файл {pdf_path} не найден.")
+
+    def __show_popup_message(self) -> None:
+        # Создаем всплывающее окно (popup)
+        popup = QMessageBox()
+        popup.setIcon(QMessageBox.Information)
+        popup.setText("Файл справки открыт в просмотрщике ПДФ-файлов по умолчанию")
+        popup.setWindowTitle("Информация")
+        popup.setStandardButtons(QMessageBox.Ok)
+        popup.setStyleSheet("QMessageBox {min-width: 300px; min-height: 100px;}")
+
+        # Автоматически закрываем окно через 5 секунд
+        QTimer.singleShot(5000, popup.accept)
+
+        popup.exec_()
 
     def click_button_answer(self) -> None:
         self.__answer_click = True
