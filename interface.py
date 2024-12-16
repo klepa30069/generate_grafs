@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import (
     QPushButton, QLabel, QLineEdit, QWidget, QFrame
 )
 import sys
+import subprocess
+import os
 
 
 class Interface:
@@ -185,6 +187,20 @@ class Interface:
         self.__click_button_task(9)
 
     def click_button_theory(self) -> None:
+        # Путь к файлу theory.pdf
+        pdf_path = os.path.join(os.getcwd(), 'theory.pdf')  # текущая директория + имя файла
+
+        # Проверим, существует ли файл
+        if os.path.exists(pdf_path):
+            # В зависимости от операционной системы открываем PDF
+            if sys.platform == 'win32':  # Для Windows
+                subprocess.run(['start', pdf_path], shell=True)
+            elif sys.platform == 'darwin':  # Для macOS
+                subprocess.run(['open', pdf_path])
+            else:  # Для Linux и других систем
+                subprocess.run(['xdg-open', pdf_path])
+        else:
+            print(f"Файл {pdf_path} не найден.")
         pass
 
     def click_button_answer(self) -> None:
