@@ -83,6 +83,8 @@ class Interface:
 
         # Средняя панель с полем ввода и кнопками
         self.__answer_input = QLineEdit()
+        self.__answer_input.setPlaceholderText("Введите ответ и нажмите Enter")
+        self.__answer_input.returnPressed.connect(self.click_button_answer)
         button_answer = QPushButton("Ответить")
         button_show_solving = QPushButton("Показать решение")
 
