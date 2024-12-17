@@ -4,20 +4,27 @@ from matplotlib import pyplot as plt
 
 class Generate_Solver:
     __text_task: str
-    __matrix_task: list[list[int]] | list[list[str]]
+    __matrix_task: list[list[str]]
     __solving: str
     __headers: list[str]
     __num_for_letter = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'H', 7: 'G', 8: 'K', 9: 'M', 10: 'N',
                         11: 'L', 12: 'R'}
 
     def __init__(self, text_task: str,
-                 matrix_task: list[list[int]] | list[list[str]], headers: list[str],
+                 matrix_task: list[list[int]], headers: list[str],
                  solving: str, ans: int) -> None:
         self.__text_task = text_task
-        self.__matrix_task = matrix_task
+        self.__matrix_int_str(matrix_task)
         self.__headers = headers
         self.__solving = solving
         self.__ans = ans
+
+    def __matrix_int_str(self, matrix_task: list[list[int]]) -> None:
+        maxsis = max(matrix_task)
+        self.__matrix_task = [['' for _ in range(len(matrix_task))] for _ in range(len(matrix_task))]
+        for i in range(len(matrix_task)):
+            for j in range(len(matrix_task)):
+                self.__matrix_task[i][j] = '' if matrix_task[i][j] == 0 else '*' if maxsis == 1 else str(matrix_task[i][j])
 
     def get_text_task(self) -> str:
         return self.__text_task
