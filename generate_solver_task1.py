@@ -16,7 +16,7 @@ class Generate_Solver_Task1:
     __matrix: np.ndarray[Any, np.dtype]
     __add_one: bool
     __Counts: Counter
-    __anser: int
+    __answer: int
     __text_task: str
     __solving_task: str
     __send_letter: list
@@ -40,7 +40,7 @@ class Generate_Solver_Task1:
     def get_task(self) -> Generate_Solver:
         return Generate_Solver(self.__text_task, self.__senf_matrix,
                                self.__send_letter, self.__solving_task,
-                               self.__anser)
+                               self.__answer)
 
     def __get_text_task(self) -> None:
         if self.__type_task == 0:
@@ -150,15 +150,15 @@ class Generate_Solver_Task1:
         all_el = []
         result = False
         for el in range(6):
-            sum = 0
+            summ = 0
             for deep_el in matrix[el]:
-                sum += deep_el
-            all_el.append(sum)
+                summ += deep_el
+            all_el.append(summ)
         self.__add_counter(all_el)
         for count in self.__Counts.values():
             if count == 1:
                 result = True
-        if result == False:
+        if not result:
             matrix = self.__add_node_list(matrix)
             self.__add_one = True
             self.__letters[self.__num_letters] = "I"
@@ -175,13 +175,13 @@ class Generate_Solver_Task1:
     def __get_solving_task(self) -> str:
         num_nodes = len(self.__matrix)
         iterations = 0
-        anser = f'Ответ: '
+        answer = f'Ответ: '
         startP = 0
         endP = 0
         if self.__type_task != 2:
             for i in range(num_nodes):
                 iterations += 1
-                anser += "Вершина {} = П{}. ".format(self.__check_answer[i], iterations)
+                answer += "Вершина {} = П{}. ".format(self.__check_answer[i], iterations)
         else:
             start_letter = self.__letters[self.__start_point]
             end_letter = self.__letters[self.__end_point]
@@ -191,15 +191,15 @@ class Generate_Solver_Task1:
                     startP = iterations
                 elif self.__check_answer[i] == self.__end_point:
                     endP = iterations
-            anser = "Вершина {} = П{}. Вершина {} = П{}. Расстояние между ними равно {}".format(start_letter, startP,
+            answer = "Вершина {} = П{}. Вершина {} = П{}. Расстояние между ними равно {}".format(start_letter, startP,
                                                                                                 end_letter, endP,
-                                                                                                self.__anser)
-        return anser
+                                                                                                self.__answer)
+        return answer
 
     def __get_ans_task(self) -> None:
         if self.__type_task == 0 or self.__type_task == 1:
-            __anser = (self.__start_point + 1) * 10 + (self.__end_point + 1)
-            self.__anser = __anser
+            __answer = (self.__start_point + 1) * 10 + (self.__end_point + 1)
+            self.__answer = __answer
         elif self.__type_task == 2:
-            anser = self.__anser_type2
-            self.__anser = anser
+            answer = self.__anser_type2
+            self.__answer = answer
