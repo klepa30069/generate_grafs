@@ -1,3 +1,4 @@
+import networkx as nx
 from matplotlib import pyplot as plt
 
 
@@ -46,27 +47,25 @@ class Generate_Solver:
 
     # TODO graf to image
     def get_image_graf(self) -> str:
-        # Создание изображения таблицы с помощью matplotlib
-        fig, ax = plt.subplots(figsize=(3, 3))  # Размер изображения подгоняется под таблицу
-        ax.axis("tight")
-        ax.axis("off")
-        table = ax.table(
-            cellText=self.__matrix_task,
-            colLabels=self.__headers,
-            rowLabels=self.__headers,
-            cellLoc="center",
-            loc="center",
-        )
-        table.auto_set_font_size(False)
-        table.set_fontsize(12)
-        table.auto_set_column_width(col=list(range(len(self.__headers))))
-
+        G = nx.Graph()
+        # Добавляем узлы в граф
+        num_nodes = len(self.__matrix_task)
+        G.add_nodes_from(range(num_nodes))
+        # Добавляем ребра в граф на основе матрицы смежности
+        for i in range(num_nodes):
+            for j in range(i, num_nodes):  # Начинаем с j=i, чтобы избежать дублирования ребер
+                if self.__matrix_task[i][j] != 0:
+                    G.add_edge(i, j)
         # Сохранение таблицы как изображения
         table_image_path = "image_task_graf.png"
-        plt.tight_layout()
-        plt.savefig(table_image_path, bbox_inches="tight", dpi=200)  # Увеличен DPI для чёткого изображения
-        plt.close(fig)
 
+        plt.clf()
+        plt.figure(figsize=(2, 2))
+        pos = nx.spring_layout(G)  # Используем расположение для графа
+        nx.draw(G, pos, with_labels=True, node_size=300, node_color='lightblue', font_size=8, font_weight='bold')
+        plt.savefig(table_image_path, bbox_inches="tight", dpi=200)  # Увеличен DPI для чёткого изображения
+        plt.close()
+        plt.clf()
         # Возврат имени файла
         return table_image_path
 

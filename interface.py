@@ -157,7 +157,7 @@ class Interface:
                 graf_pixmap = QPixmap(self.__task.get_image_graf())
                 self.__image_label.setPixmap(graf_pixmap)
             else:
-                table_pixmap = QPixmap(self.__task.get_image_matrix())
+                table_pixmap = QPixmap(self.__task.get_image_matrix())#матрица смежности
                 graf_pixmap = QPixmap(self.__task.get_image_graf())
 
                 # Создание нового изображения, чтобы разместить оба изображения
