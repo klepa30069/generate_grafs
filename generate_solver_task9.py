@@ -76,7 +76,7 @@ class Generate_Solver_Task9:
         str_vertex = str_vertex[:-2]
 
         self.__text_task = (
-            f'На рисунке — схема дорог, связывающих города {str_vertex}. \nПо каждой дороге можно двигаться только в одном направлении, указанном стрелкой. \nСколько существует различных путей из города {self.__num_for_letter[0]} в город {self.__num_for_letter[count - 1]}?'
+            f'На рисунке — схема дорог, связывающих города {str_vertex}. По каждой дороге можно двигаться только в одном направлении, указанном стрелкой. \nСколько существует различных путей из города {self.__num_for_letter[0]} в город {self.__num_for_letter[count - 1]}?'
         )
 
     def __get_count_paths(self, matrix: list[list[int]]) -> None:

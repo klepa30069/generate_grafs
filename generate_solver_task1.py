@@ -20,7 +20,7 @@ class Generate_Solver_Task1:
     __text_task: str
     __solving_task: str
     __send_letter: list
-    __senf_matrix: list[list[int]]
+    __senf_matrix: list[list[int]] | list[list[str]]
     __anser_type2: int
 
     def __init__(self) -> None:
@@ -39,7 +39,7 @@ class Generate_Solver_Task1:
 
     def get_task(self) -> Generate_Solver:
         return Generate_Solver(self.__text_task, self.__senf_matrix,
-                               self.__send_letter, self.__solving_task,
+                               ['П' + str(i + 1) for i in range(len(self.__senf_matrix))], self.__solving_task,
                                self.__answer)
 
     def __get_text_task(self) -> None:
@@ -51,19 +51,22 @@ class Generate_Solver_Task1:
                                 "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
                                 f"Определите номера населенных пунктов {self.__letters[self.__start_point]} и {self.__letters[self.__end_point]} в таблице. " +
                                 "В ответе запишите числа в порядке возрастания без разделителей.")
+            for i in range(len(self.__senf_matrix)):
+                for j in range(len(self.__senf_matrix)):
+                    self.__senf_matrix[i][j] = '' if self.__senf_matrix[i][j] == 0 else '*'
         elif self.__type_task == 1:
             self.__text_task = ("На рисунке схема дорог изображена в виде графа, " +
                                 "в таблице содержатся сведения о длине этих дорог в километрах. " +
                                 "Поскольку таблицу и схему рисовали независимо друг от друга, " +
                                 "нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
-                                f"Определите длину дороги {(self.__letters[self.__start_point], self.__letters[self.__end_point])}. " +
-                                "В ответе запишите целое число— длину дороги в километрах.")
+                                f"Определите длину дороги {self.__letters[self.__start_point]} - {self.__letters[self.__end_point]}. " +
+                                "В ответе запишите целое число — длину дороги в километрах.")
         elif self.__type_task == 2:
             self.__text_task = ("На рисунке справа схема дорог Н-ского района изображена в виде графа, " +
                                 "в таблице содержатся сведения о длинах этих дорог (в километрах)." +
                                 "Так как таблицу и схему рисовали независимо друг от друга, " +
                                 "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
-                                f"Определите, какова длина дороги из пункта {self.__letters[self.__start_point]} в пункт {self.__letters[self.__end_point]}. В ответе запишите целое число— так, как оно указано в таблице.")
+                                f"Определите, какова длина дороги из пункта {self.__letters[self.__start_point]} в пункт {self.__letters[self.__end_point]}. В ответе запишите целое число — так, как оно указано в таблице.")
 
     def __type_task_generate(self) -> int:
         numbers = [0, 1, 2]
@@ -191,6 +194,7 @@ class Generate_Solver_Task1:
                     startP = iterations
                 elif self.__check_answer[i] == self.__end_point:
                     endP = iterations
+            self.__answer = 0
             answer = "Вершина {} = П{}. Вершина {} = П{}. Расстояние между ними равно {}".format(start_letter, startP,
                                                                                                 end_letter, endP,
                                                                                                 self.__answer)

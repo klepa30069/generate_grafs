@@ -4,12 +4,14 @@ from matplotlib import pyplot as plt
 
 class Generate_Solver:
     __text_task: str
-    __matrix_task: list[list[int]]
+    __matrix_task: list[list[int]] | list[list[str]]
     __solving: str
     __headers: list[str]
+    __num_for_letter = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'H', 7: 'G', 8: 'K', 9: 'M', 10: 'N',
+                        11: 'L', 12: 'R'}
 
     def __init__(self, text_task: str,
-                 matrix_task: list[list[int]], headers: list[str],
+                 matrix_task: list[list[int]] | list[list[str]], headers: list[str],
                  solving: str, ans: int) -> None:
         self.__text_task = text_task
         self.__matrix_task = matrix_task
@@ -48,20 +50,25 @@ class Generate_Solver:
     # TODO graf to image
     def get_image_graf(self) -> str:
         G = nx.Graph()
-        # Добавляем узлы в граф
         num_nodes = len(self.__matrix_task)
-        G.add_nodes_from(range(num_nodes))
-        # Добавляем ребра в граф на основе матрицы смежности
         for i in range(num_nodes):
             for j in range(i, num_nodes):  # Начинаем с j=i, чтобы избежать дублирования ребер
-                if self.__matrix_task[i][j] != 0:
-                    G.add_edge(i, j)
+                if self.__matrix_task[i][j] != self.__matrix_task[j][i]:
+                    G = nx.DiGraph()
+                    break
+        # Добавляем узлы в граф
+        G.add_nodes_from(self.__num_for_letter[i] for i in range(num_nodes))
+        # Добавляем ребра в граф на основе матрицы смежности
+        for i in range(num_nodes):
+            for j in range(i + 1, num_nodes):  # Начинаем с j=i, чтобы избежать дублирования ребер
+                if self.__matrix_task[i][j] != 0 and self.__matrix_task[i][j] != '':
+                    G.add_edge(self.__num_for_letter[i], self.__num_for_letter[j])
         # Сохранение таблицы как изображения
         table_image_path = "image_task_graf.png"
 
         plt.clf()
         plt.figure(figsize=(2, 2))
-        pos = nx.spring_layout(G)  # Используем расположение для графа
+        pos = nx.planar_layout(G)  # Используем расположение для графа
         nx.draw(G, pos, with_labels=True, node_size=300, node_color='lightblue', font_size=8, font_weight='bold')
         plt.savefig(table_image_path, bbox_inches="tight", dpi=200)  # Увеличен DPI для чёткого изображения
         plt.close()
