@@ -20,7 +20,7 @@ class Generate_Solver_Task1:
     __text_task: str
     __solving_task: str
     __send_letter: list
-    __senf_matrix: list[list[int]] | list[list[str]]
+    __senf_matrix: list[list[int]]
     __anser_type2: int
 
     def __init__(self) -> None:
@@ -51,9 +51,6 @@ class Generate_Solver_Task1:
                                 "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
                                 f"Определите номера населенных пунктов {self.__letters[self.__start_point]} и {self.__letters[self.__end_point]} в таблице. " +
                                 "В ответе запишите числа в порядке возрастания без разделителей.")
-            for i in range(len(self.__senf_matrix)):
-                for j in range(len(self.__senf_matrix)):
-                    self.__senf_matrix[i][j] = '' if self.__senf_matrix[i][j] == 0 else '*'
         elif self.__type_task == 1:
             self.__text_task = ("На рисунке схема дорог изображена в виде графа, " +
                                 "в таблице содержатся сведения о длине этих дорог в километрах. " +
