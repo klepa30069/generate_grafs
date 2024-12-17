@@ -1,5 +1,3 @@
-from numpy.distutils.conv_template import header
-
 from generate_solver import Generate_Solver
 
 

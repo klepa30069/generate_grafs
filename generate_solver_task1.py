@@ -5,6 +5,7 @@ from generate_solver import Generate_Solver
 import random
 from collections import Counter
 
+
 class Generate_Solver_Task1:
     __type_task: int
     __points: list
@@ -21,9 +22,8 @@ class Generate_Solver_Task1:
     __send_letter: list
     __senf_matrix: list[list[int]]
     __anser_type2: int
+
     def __init__(self) -> None:
-        self.__send_letter = None
-        self.__anser_type2 = None
         self.__type_task = self.__type_task_generate()
         self.__points = ["A", "B", "C", "D", "E", "F", "G", "H"]
         self.__num_letters = random.randint(6, 8)
@@ -31,15 +31,11 @@ class Generate_Solver_Task1:
         self.__start_point, self.__end_point = self.__random_start_letter()
         self.__matrix = self.__get_matrix_task()
         self.__add_one = False
-        self.__Counts = None
-        self.__anser = None
-        self.__text_task = None
         self.__solving_task = self.__get_solving_task()
         self.__senf_matrix = [[int(x) for x in row] for row in self.__matrix]
         self.__get_ans_task()
-        self.__check_anser = None
+        self.__check_answer = None
         self.__get_text_task()
-
 
     def get_task(self) -> Generate_Solver:
         return Generate_Solver(self.__text_task, self.__senf_matrix,
@@ -48,26 +44,26 @@ class Generate_Solver_Task1:
 
     def __get_text_task(self) -> None:
         if self.__type_task == 0:
-            self.__text_task =  (f"На рисунке справа схема дорог Н-ского района изображена в виде графа, " +
-                              "в таблице содержатся сведения о дорогах между населенными пунктами " +
-                              "(звездочка означает, что дорога между соответствующими городами есть)." +
-                              "Так как таблицу и схему рисовали независимо друг от друга, " +
-                              "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
-                              f"Определите номера населенных пунктов {self.__letters[self.__start_point]} и {self.__letters[self.__end_point]} в таблице. " +
-                              "В ответе запишите числа в порядке возрастания без разделителей.")
+            self.__text_task = (f"На рисунке справа схема дорог Н-ского района изображена в виде графа, " +
+                                "в таблице содержатся сведения о дорогах между населенными пунктами " +
+                                "(звездочка означает, что дорога между соответствующими городами есть)." +
+                                "Так как таблицу и схему рисовали независимо друг от друга, " +
+                                "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
+                                f"Определите номера населенных пунктов {self.__letters[self.__start_point]} и {self.__letters[self.__end_point]} в таблице. " +
+                                "В ответе запишите числа в порядке возрастания без разделителей.")
         elif self.__type_task == 1:
-            self.__text_task =  ("На рисунке схема дорог изображена в виде графа, " +
-                              "в таблице содержатся сведения о длине этих дорог в километрах. " +
-                              "Поскольку таблицу и схему рисовали независимо друг от друга, " +
-                              "нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
-                              f"Определите длину дороги {(self.__letters[self.__start_point], self.__letters[self.__end_point])}. " +
-                              "В ответе запишите целое число— длину дороги в километрах.")
+            self.__text_task = ("На рисунке схема дорог изображена в виде графа, " +
+                                "в таблице содержатся сведения о длине этих дорог в километрах. " +
+                                "Поскольку таблицу и схему рисовали независимо друг от друга, " +
+                                "нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
+                                f"Определите длину дороги {(self.__letters[self.__start_point], self.__letters[self.__end_point])}. " +
+                                "В ответе запишите целое число— длину дороги в километрах.")
         elif self.__type_task == 2:
-            self.__text_task =  ("На рисунке справа схема дорог Н-ского района изображена в виде графа, " +
-                              "в таблице содержатся сведения о длинах этих дорог (в километрах)." +
-                              "Так как таблицу и схему рисовали независимо друг от друга, " +
-                              "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
-                              f"Определите, какова длина дороги из пункта {self.__letters[self.__start_point]} в пункт {self.__letters[self.__end_point]}. В ответе запишите целое число— так, как оно указано в таблице.")
+            self.__text_task = ("На рисунке справа схема дорог Н-ского района изображена в виде графа, " +
+                                "в таблице содержатся сведения о длинах этих дорог (в километрах)." +
+                                "Так как таблицу и схему рисовали независимо друг от друга, " +
+                                "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
+                                f"Определите, какова длина дороги из пункта {self.__letters[self.__start_point]} в пункт {self.__letters[self.__end_point]}. В ответе запишите целое число— так, как оно указано в таблице.")
 
     def __type_task_generate(self) -> int:
         numbers = [0, 1, 2]
@@ -76,7 +72,7 @@ class Generate_Solver_Task1:
         return choice
 
     def __random_letter(self) -> dict:  # Рандомайзер букв в матрице
-        letters = random.sample(self.__points, self.__num_letters)# Выбирает __num_letters уникальных букв
+        letters = random.sample(self.__points, self.__num_letters)  # Выбирает __num_letters уникальных букв
         self.__send_letter = letters
         return dict(enumerate(letters))
 
@@ -92,7 +88,7 @@ class Generate_Solver_Task1:
         permutation = np.random.permutation(num_nodes)  # Случайная перестановка индексов
         shuffled_matrix = adjacency_matrix[:, permutation][permutation,
                           :]  # Применяем перестановку к строкам и столбцам
-        self.__check_anser = [self.__letters[i] for i in permutation]
+        self.__check_answer = [self.__letters[i] for i in permutation]
 
         return shuffled_matrix
 
@@ -137,7 +133,7 @@ class Generate_Solver_Task1:
         num_nodes = len(adjacency_matrix)
         new_row = [0] * (num_nodes + 1)
         adjacency_matrix.append(new_row)
-        random_val, empty = self.random_start_letter()
+        random_val, empty = self.__random_start_letter()
         if self.__type_task == 0:
             adjacency_matrix[num_nodes][random_val] = 1
             adjacency_matrix[random_val][num_nodes] = 1
@@ -185,15 +181,15 @@ class Generate_Solver_Task1:
         if self.__type_task != 2:
             for i in range(num_nodes):
                 iterations += 1
-                anser += "Вершина {} = П{}. ".format(self.__check_anser[i], iterations)
+                anser += "Вершина {} = П{}. ".format(self.__check_answer[i], iterations)
         else:
             start_letter = self.__letters[self.__start_point]
             end_letter = self.__letters[self.__end_point]
             for i in range(num_nodes):
                 iterations += 1
-                if self.__check_anser[i] == start_letter:
+                if self.__check_answer[i] == start_letter:
                     startP = iterations
-                elif self.__check_anser[i] == self.__end_point:
+                elif self.__check_answer[i] == self.__end_point:
                     endP = iterations
             anser = "Вершина {} = П{}. Вершина {} = П{}. Расстояние между ними равно {}".format(start_letter, startP,
                                                                                                 end_letter, endP,
