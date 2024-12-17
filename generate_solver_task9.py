@@ -12,9 +12,9 @@ class Generate_Solver_Task9:
     def get_task(self) -> Generate_Solver:
         return Generate_Solver('таск9\nпродолжение таск9', [
             [0, 1, 2, 3],
-            [1, 0, 0, 4],
-            [2, 0, 0, 1],
-            [3, 4, 1, 0]
+            [0, 0, 0, 4],
+            [0, 0, 0, 1],
+            [0, 0, 0, 0]
         ], ['A', 'B', 'C', 'D'], 'решение', 6)
 
     def __init__(self) -> None:
