@@ -135,4 +135,5 @@ class Generate_Solver_Task4:
             path_str += str(self.__num_for_letter[numb]) + ' -> '
             # path_str += str(numb) + ' -> '
         path_str = path_str[:-4]
-        self.__solving_task = path_str
+        self.__solving_task = 'Кратчайший путь имеет вид:\n\n'
+        self.__solving_task += path_str
