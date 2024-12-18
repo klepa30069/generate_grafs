@@ -1,5 +1,5 @@
 from typing import Any
-import networkx as nx
+
 import numpy as np
 from generate_solver import Generate_Solver
 import random
@@ -30,7 +30,7 @@ class Generate_Solver_Task1:
         self.__anser_type2 = None
         self.__original_matrix = None
         self.__type_task = self.__type_task_generate()
-        self.__points = ["A", "B", "C", "D", "E", "F", "G", "H","I","J","K","L"]
+        self.__points = ["A", "B", "C", "D", "E", "F", "H", "G"]
         self.__num_letters = random.randint(6, 8)
         self.__letters = self.__random_letter()
         self.__start_point, self.__end_point = self.__random_start_letter()
@@ -42,15 +42,16 @@ class Generate_Solver_Task1:
         self.__senf_matrix = [[int(x) for x in row] for row in self.__matrix]
 
     def get_task(self) -> Generate_Solver:
-        #matrix = self.__get_matrix_task()
+        matrix = self.__get_matrix_task()
         self.__get_ans_task()
-        #new_matrix = [[int(x) for x in row] for row in self.__matrix]
+        new_matrix = [[int(x) for x in row] for row in matrix]
+        text_anser = self.__get_solving_task()
         self.__get_text_task()
         print((self.__text_task, self.__original_matrix,
                                ['П' + str(i + 1) for i in range(len(self.__original_matrix))], self.__solving_task,
                                self.__anser))
         return Generate_Solver(self.__text_task, self.__original_matrix,
-                               ['П' + str(i + 1) for i in range(len(self.__original_matrix))], self.__solving_task,
+                               ['П' + str(i + 1) for i in range(len(self.__original_matrix))], text_anser,
                                self.__anser)
 
     def __get_text_task(self) -> None:
@@ -88,7 +89,6 @@ class Generate_Solver_Task1:
 
     def __random_start_letter(self) -> (int, int):  # Рандомайзер стартовых буковок
         numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        print(numbers[:self.__num_letters])
         point1, point2 = random.sample(numbers[:self.__num_letters], 2)
         return point1, point2
 
@@ -111,40 +111,30 @@ class Generate_Solver_Task1:
         """Генерирует случайную матрицу смежности с заданным количеством ребер."""
         adjacency_matrix = [[0] * num_nodes for _ in range(num_nodes)]
         edges_added = 0
-        while True:  # Попытка генерации планарного графа
-            adjacency_matrix = [[0] * num_nodes for _ in range(num_nodes)]  # Обнуляем матрицу для новой попытки
-            edges_added = 0
-
-            # Генерируем начальные ребра с проверкой
-            for i in range(num_nodes):
-                if edges_added >= num_edges:
-                    break
-
-                neighbor = random.choice([j for j in range(num_nodes) if j != i])
-                if self.__type_task == 0:
-                    adjacency_matrix[i][neighbor] = 1
-                    adjacency_matrix[neighbor][i] = 1
-                else:
-                    rand_val = random.randint(10, 100)
-                    adjacency_matrix[i][neighbor] = rand_val
-                    adjacency_matrix[neighbor][i] = rand_val
-
-                    # Проверка ребра
-                    if (i == self.__start_point or i == self.__end_point) and (
-                            neighbor == self.__start_point or neighbor == self.__end_point):
-                        self.__anser_type2 = rand_val
-                edges_added += 1
-
-            graph = nx.from_numpy_array(
-                np.array(adjacency_matrix))  # Преобразовываем матрицу в граф networkx для проверки планарности
-            if nx.check_planarity(graph)[0] and nx.is_connected(graph):
-                break
         if self.__type_task == 0:
-            if adjacency_matrix[self.__start_point][self.__end_point] == 0:
+            while edges_added < num_edges:
+                row = random.randint(0, num_nodes - 1)
+                col = random.randint(0, num_nodes - 1)
+                if row != col and adjacency_matrix[row][col] == 0:
+                    adjacency_matrix[row][col] = 1
+                    adjacency_matrix[col][row] = 1  # Для неориентированного графа
+                    edges_added += 1
+        elif self.__type_task != 0:
+            while edges_added < num_edges:
+                row = random.randint(0, num_nodes - 1)
+                col = random.randint(0, num_nodes - 1)
+                if row != col and adjacency_matrix[row][col] == 0:
+                    rand_val = random.randint(10, 100)
+                    adjacency_matrix[row][col] = rand_val
+                    adjacency_matrix[col][row] = rand_val  # Для неориентированного графа
+                    edges_added += 1
+                    if row == self.__start_point or row == self.__end_point and col == self.__start_point or col == self.__end_point:
+                        self.__anser_type2 = rand_val
+        if adjacency_matrix[self.__start_point][self.__end_point] == 0:
+            if self.__type_task == 0:
                 adjacency_matrix[self.__start_point][self.__end_point] = 1
                 adjacency_matrix[self.__end_point][self.__start_point] = 1
-        elif self.__type_task != 0:
-            if adjacency_matrix[self.__start_point][self.__end_point] == 0:
+            elif self.__type_task != 0:
                 rand_val = random.randint(10, 100)
                 adjacency_matrix[self.__start_point][self.__end_point] = rand_val
                 adjacency_matrix[self.__end_point][self.__start_point] = rand_val
@@ -192,7 +182,7 @@ class Generate_Solver_Task1:
 
     def __get_matrix_task(self) -> np.ndarray[Any, np.dtype]:
         num_nodes = self.__num_letters
-        num_edges = (3 * num_nodes/2)
+        num_edges = num_nodes + num_nodes / 2
         adjacency_matrix = self.__generate_random___matrix_with_edges(num_nodes, num_edges)
         self.__check_rows(adjacency_matrix)
         self.Task__matrix = self.__shuffle_adjacency_matrix(adjacency_matrix)
@@ -201,9 +191,21 @@ class Generate_Solver_Task1:
     def __get_solving_task(self) -> str:
         #self.__get_ans_task()
         print(self.__type_task)
+        iterations = 1
         num_nodes = len(self.__matrix)
         anser = f'Ответ: '
-        if self.__type_task != 2:
+        if self.__type_task == 0:
+            for i in range(num_nodes):
+                anser += "Вершина {} = П{}. ".format(self.__points[i], i+1)
+            anser += "Ответ: {}".format(self.__anser)
+            self.__get_text_task()
+
+        elif self.__type_task == 1:
+            if self.__original_matrix[self.__start_point][self.__end_point] == 0:
+                rand_val = random.randint(10, 100)
+                self.__original_matrix[self.__start_point][self.__end_point] = rand_val
+                self.__original_matrix[self.__end_point][self.__start_point] = rand_val
+            self.__anser = self.__original_matrix[self.__end_point][self.__start_point]
             for i in range(num_nodes):
                 anser += "Вершина {} = П{}. ".format(self.__points[i], i+1)
             anser += "Ответ: {}".format(self.__anser)
@@ -222,13 +224,7 @@ class Generate_Solver_Task1:
         return anser
 
     def __get_ans_task(self) -> None:
-        if self.__type_task == 0:
+        if self.__type_task == 0 or self.__type_task == 1:
             self.__anser = int(str(self.__start_point) + str(self.__end_point)) + 11
-        elif self.__type_task == 1:
-            if self.__original_matrix[self.__start_point][self.__end_point] == 0:
-                rand_val = random.randint(10, 100)
-                self.__original_matrix[self.__start_point][self.__end_point] = rand_val
-                self.__original_matrix[self.__end_point][self.__start_point] = rand_val
-            self.__anser = self.__original_matrix[self.__end_point][self.__start_point]
         elif self.__type_task == 2:
             self.__anser = self.__anser_type2
