@@ -18,8 +18,10 @@ class Generate_Solver_Task4:
                                self.__ans_task)
 
     def __init__(self) -> None:
+        # Создаёт по методам объект класса
         self.__generate_matrix()
         num_end = len(self.__matrix_task) - 1
+        # TODO ЮРА генерит условие
         self.__generate_text_task(num_end + 1)
 
         # Находим все возможные маршруты
