@@ -5,7 +5,7 @@ from generate_solver import Generate_Solver
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import (
     QApplication, QVBoxLayout, QHBoxLayout,
-    QPushButton, QLabel, QLineEdit, QWidget, QFrame, QMessageBox
+    QPushButton, QLabel, QLineEdit, QWidget, QMessageBox
 )
 import sys
 import subprocess
@@ -20,10 +20,14 @@ class Interface:
     __show_third_block: bool
     __answer_click: bool
     __task: Generate_Solver
+    __type_task_last: int | None
     # Поля необходимые для работы с интерфейсом между функциями
     __window: QWidget
     __main_layout: QVBoxLayout
     __answer_input: QLineEdit
+    __button_4_OGE: QPushButton
+    __button_1_EGE: QPushButton
+    __button_9_OGE: QPushButton
     __task_display_1: QLabel
     __image_label: QLabel
     __task_display_2: QLabel
@@ -37,6 +41,7 @@ class Interface:
         self.__show_third_block = False
         self.__answer_click = False
         self.__message_label = None  # Новый атрибут для надписи с сообщением
+        self.__type_task_last = None
 
     def __add_second_block(self, type_task: int) -> None:
         # Создание второго блока
@@ -130,9 +135,17 @@ class Interface:
         self.__show_third_block = True
         self.__height = 700
         self.__window.setFixedHeight(self.__height)
-        self.__window.move(self.__window.pos().x(), self.__window.pos().y() - 50)
+        # self.__window.move(self.__window.pos().x(), self.__window.pos().y() - 50)
 
     def __click_button_task(self, type_task: int) -> None:
+        if self.__type_task_last is not None:
+            if self.__type_task_last == 1:
+                self.__button_1_EGE.setStyleSheet("background-color: white")
+            elif self.__type_task_last == 4:
+                self.__button_4_OGE.setStyleSheet("background-color: white")
+            elif self.__type_task_last == 9:
+                self.__button_9_OGE.setStyleSheet("background-color: white")
+        self.__type_task_last = type_task
         if not self.__show_second_block:
             self.__task = Controller().get_new_task(type_task)
             self.__add_second_block(type_task)
@@ -145,7 +158,7 @@ class Interface:
             # Изменение размера окна
             self.__height = 500
             self.__window.setFixedHeight(self.__height)
-            self.__window.move(self.__window.pos().x(), self.__window.pos().y() + 50)
+            # self.__window.move(self.__window.pos().x(), self.__window.pos().y() + 50)
 
             self.__answer_click = False
             self.__answer_input.setText('')
@@ -182,12 +195,15 @@ class Interface:
 
     def click_button_1task(self) -> None:
         self.__click_button_task(1)
+        self.__button_1_EGE.setStyleSheet("background-color: yellow")
 
     def click_button_4task(self) -> None:
         self.__click_button_task(4)
+        self.__button_4_OGE.setStyleSheet("background-color: yellow")
 
     def click_button_9task(self) -> None:
         self.__click_button_task(9)
+        self.__button_9_OGE.setStyleSheet("background-color: yellow")
 
     def click_button_theory(self) -> None:
         # Путь к файлу theory.pdf
@@ -252,22 +268,22 @@ class Interface:
         # Создание первого блока
         # Создание кнопок первого блока
         button_theory = QPushButton("Теория")
-        button_4_OGE = QPushButton("4 задача ОГЭ")
-        button_9_OGE = QPushButton("9 задача ОГЭ")
-        button_1_EGE = QPushButton("1 задача ЕГЭ")
+        self.__button_4_OGE = QPushButton("4 задача ОГЭ")
+        self.__button_9_OGE = QPushButton("9 задача ОГЭ (ДЕМО)")
+        self.__button_1_EGE = QPushButton("1 задача ЕГЭ (ДЕМО)")
 
         # Обработка нажатий на кнопки
         button_theory.clicked.connect(self.click_button_theory)
-        button_1_EGE.clicked.connect(self.click_button_1task)
-        button_4_OGE.clicked.connect(self.click_button_4task)
-        button_9_OGE.clicked.connect(self.click_button_9task)
+        self.__button_1_EGE.clicked.connect(self.click_button_1task)
+        self.__button_4_OGE.clicked.connect(self.click_button_4task)
+        self.__button_9_OGE.clicked.connect(self.click_button_9task)
 
         # Создание отображения первого блока
         top_layout = QHBoxLayout()
         top_layout.addWidget(button_theory)
-        top_layout.addWidget(button_4_OGE)
-        top_layout.addWidget(button_9_OGE)
-        top_layout.addWidget(button_1_EGE)
+        top_layout.addWidget(self.__button_4_OGE)
+        top_layout.addWidget(self.__button_9_OGE)
+        top_layout.addWidget(self.__button_1_EGE)
 
         # Добавления первого блока в основной лэйаут
         self.__main_layout.addLayout(top_layout)
