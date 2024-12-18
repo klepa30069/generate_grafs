@@ -138,18 +138,30 @@ class Interface:
         # self.__window.move(self.__window.pos().x(), self.__window.pos().y() - 50)
 
     def __click_button_task(self, type_task: int) -> None:
-        if self.__type_task_last is not None:
+        if not self.__show_second_block:
+            self.__task = Controller().get_new_task(type_task)
+            self.__add_second_block(type_task)
+            self.__type_task_last = type_task
+            if self.__type_task_last == 1:
+                self.__button_1_EGE.setStyleSheet("background-color: yellow")
+            elif self.__type_task_last == 4:
+                self.__button_4_OGE.setStyleSheet("background-color: yellow")
+            elif self.__type_task_last == 9:
+                self.__button_9_OGE.setStyleSheet("background-color: yellow")
+        elif self.__answer_click:
             if self.__type_task_last == 1:
                 self.__button_1_EGE.setStyleSheet("background-color: white")
             elif self.__type_task_last == 4:
                 self.__button_4_OGE.setStyleSheet("background-color: white")
             elif self.__type_task_last == 9:
                 self.__button_9_OGE.setStyleSheet("background-color: white")
-        self.__type_task_last = type_task
-        if not self.__show_second_block:
-            self.__task = Controller().get_new_task(type_task)
-            self.__add_second_block(type_task)
-        elif self.__answer_click:
+            self.__type_task_last = type_task
+            if self.__type_task_last == 1:
+                self.__button_1_EGE.setStyleSheet("background-color: yellow")
+            elif self.__type_task_last == 4:
+                self.__button_4_OGE.setStyleSheet("background-color: yellow")
+            elif self.__type_task_last == 9:
+                self.__button_9_OGE.setStyleSheet("background-color: yellow")
             self.__task = Controller().get_new_task(type_task)
             if self.__show_third_block:
                 self.__show_third_block = False
@@ -195,15 +207,12 @@ class Interface:
 
     def click_button_1task(self) -> None:
         self.__click_button_task(1)
-        self.__button_1_EGE.setStyleSheet("background-color: yellow")
 
     def click_button_4task(self) -> None:
         self.__click_button_task(4)
-        self.__button_4_OGE.setStyleSheet("background-color: yellow")
 
     def click_button_9task(self) -> None:
         self.__click_button_task(9)
-        self.__button_9_OGE.setStyleSheet("background-color: yellow")
 
     def click_button_theory(self) -> None:
         # Путь к файлу theory.pdf
