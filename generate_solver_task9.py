@@ -74,7 +74,7 @@ class Generate_Solver_Task9:
             str_vertex += self.__num_for_letter[i] + ', '
             self.__names_vertex.append(self.__num_for_letter[i])
         str_vertex = str_vertex[:-2]
-
+        # TODO условие
         self.__text_task = (
             f'На рисунке — схема дорог, связывающих города {str_vertex}. По каждой дороге можно двигаться только в одном направлении, указанном стрелкой. \nСколько существует различных путей из города {self.__num_for_letter[0]} в город {self.__num_for_letter[count - 1]}?'
         )
