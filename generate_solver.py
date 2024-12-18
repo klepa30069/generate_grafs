@@ -76,14 +76,14 @@ class Generate_Solver:
         plt.clf()
         plt.figure(figsize=(2, 2))
         pos = nx.planar_layout(G)  # Используем расположение для графа
-        nx.draw(G, pos, with_labels=True, node_size=300, node_color='lightblue', font_size=8, font_weight='bold')
+        nx.draw(G, pos, with_labels=True, node_size=100, node_color='lightblue', font_size=8, font_weight='bold')
         plt.savefig(table_image_path, bbox_inches="tight", dpi=200)  # Увеличен DPI для чёткого изображения
         plt.close()
         plt.clf()
         # Возврат имени файла
         return table_image_path
 
-    def get_matrix_task(self) -> list[list[int]]:
+    def get_matrix_task(self) -> list[list[str]]:
         return self.__matrix_task
 
     def get_solving_task(self) -> str:
