@@ -1,5 +1,4 @@
 from generate_solver import Generate_Solver
-
 import random
 import heapq
 
@@ -19,67 +18,49 @@ class Generate_Solver_Task4:
                                self.__ans_task)
 
     def __init__(self) -> None:
-        # Создаёт по методам объект класса
         self.__generate_matrix()
         num_end = len(self.__matrix_task) - 1
-
-        # TODO ЮРА генерит условие
         self.__generate_text_task(num_end + 1)
-        self.__dijkstra(self.__matrix_task, 0, num_end)
+
+        # Находим все возможные маршруты
+        all_routes, shortest_distance = self.__find_all_routes(self.__matrix_task, 0, num_end)
+
+        # Формируем строку с путями и минимальным расстоянием
+        self.__solving_task = "Все возможные маршруты:\n"
+        for route, distance in all_routes:
+            self.__solving_task += f"Существует маршрут: {' -> '.join(route)} с расстоянием {distance} км\n"
+
+        self.__solving_task += f'\nКратчайший маршрут имеет расстояние {shortest_distance} км.'
+        self.__ans_task = int(shortest_distance)
 
     # Вспомогательные алгоритмы
     def __generate_matrix(self) -> None:
-        # Максимальное значение веса ребра
         max_weight_edge = 10
-
-        # Введём ограничения по количеству вершин
         count_vertices = [4, 5, 6]
-        # Вероятности встречи количества вершин в задачах
         probabilities_vertices = [0.1, 0.6, 0.3]
-
-        # Зададим случайное число вершин
         num_vertices = random.choices(count_vertices, weights=probabilities_vertices, k=1)[0]
-        # num_vertices = random.randint(min_vertices, max_vertices)
 
-        # Создадим матрицу смежности с нулями
         matrix = [[0] * num_vertices for _ in range(num_vertices)]
 
-        # Для того, чтобы граф был связным
-        # Создадим минимальное остовное дерево
-        # TODO Можно подумать как усложнить условие связности, чтобы вершины были соединены не только 1 -> 2 -> ...
         for i in range(1, num_vertices):
-            # Генерим с небольшим ограничением сверху, чтобы было выгоднее идти через большее количество вершин
             weight = random.randint(1, max_weight_edge - 3)
             matrix[i - 1][i] = weight
             matrix[i][i - 1] = weight
 
-        # TODO Можно подумать, чтобы добавить зависимость и ограничение количества рёбер от количества вершин (ввести счётчик рёбер)
-
-        # OLD solver
-        # Добавляем дополнительные рёбра с вероятностью, чтобы увеличить плотность
         for i in range(num_vertices):
             for j in range(i + 1, num_vertices):
-                if num_vertices == 4:  # Для 4-х вершин заполняем все рёбра
-                    if matrix[i][j] == 0:
-                        weight = random.randint(2, max_weight_edge)
-                        matrix[i][j] = weight
-                        matrix[j][i] = weight
-                else:
-                    if matrix[i][j] == 0 and random.random() < 0.5:  # Вероятность 50%
-                        weight = random.randint(2, max_weight_edge)
-                        matrix[i][j] = weight
-                        matrix[j][i] = weight
+                if matrix[i][j] == 0 and random.random() < 0.5:
+                    weight = random.randint(2, max_weight_edge)
+                    matrix[i][j] = weight
+                    matrix[j][i] = weight
 
-        # Добавляем вероятность соединения первой вершины с последней с большим весом
         if matrix[num_vertices - 1][0] != 0:
             weight = random.randint((max_weight_edge // 2) * num_vertices, max_weight_edge * 3 + 1)
             matrix[num_vertices - 1][0] = weight
             matrix[0][num_vertices - 1] = weight
 
-        # Сохраняем в объект класса сгенерированную матрицу
         self.__matrix_task = matrix
 
-    # TODO Генерирует только из первой в последнюю
     def __generate_text_task(self, count: int) -> None:
         str_vertex = ''
         self.__names_vertex = []
@@ -93,47 +74,31 @@ class Generate_Solver_Task4:
                 f'Определите длину кратчайшего пути между пунктами {self.__num_for_letter[0]} и {self.__num_for_letter[count - 1]} - первым и последним. ' +
                 'Передвигаться можно только по дорогам, протяженность которых указана в таблице.')
 
-    def __dijkstra(self, graph: list[list[int]], start: int, end: int) -> None:
-        # Инициализация
-        n = len(graph)
-        distances = [float('inf')] * n  # Заполнение массива бесконечностями
-        distances[start] = 0
-        parents = [-1] * n  # Для восстановления пути
-        pq = [(0, start)]  # (расстояние, вершина)
+    def __find_all_routes(self, graph: list[list[int]], start: int, end: int) -> tuple[
+        list[tuple[list[str], int]], int]:
+        all_routes = []
+        shortest_distance = float('inf')
 
-        while pq:
-            current_distance, current_vertex = heapq.heappop(pq)
+        # Вспомогательная функция для поиска маршрутов
+        def dfs(current, path, current_distance, visited):
+            nonlocal shortest_distance
+            if current == end:
+                # Если дошли до конечной вершины, сохраняем путь и его длину
+                all_routes.append((path[:], current_distance))  # Копируем путь
+                shortest_distance = min(shortest_distance, current_distance)
+                return
 
-            # Если расстояние в очереди больше уже найденного, пропускаем
-            if current_distance > distances[current_vertex]:
-                continue
+            # Проходим по всем соседям
+            for neighbor, weight in enumerate(graph[current]):
+                if weight > 0 and neighbor not in visited:  # Если существует ребро и вершина еще не в пути
+                    visited.add(neighbor)  # Добавляем вершину в посещённые
+                    path.append(self.__num_for_letter[neighbor])
+                    dfs(neighbor, path, current_distance + weight, visited)
+                    path.pop()  # Убираем вершину из пути
+                    visited.remove(neighbor)  # Убираем вершину из посещённых
 
-            # Обновляем расстояния до соседей
-            for neighbor, weight in enumerate(graph[current_vertex]):
-                if weight > 0:  # Если есть ребро
-                    distance = current_distance + weight
-                    if distance < distances[neighbor]:
-                        distances[neighbor] = distance
-                        parents[neighbor] = current_vertex
-                        heapq.heappush(pq, (distance, neighbor))
+        # Инициализация с начальной вершины
+        visited = set([start])  # Множество посещённых вершин
+        dfs(start, [self.__num_for_letter[start]], 0, visited)
 
-        # Восстановление пути
-        path = []
-        current = end
-        while current != -1:
-            path.append(current)
-            current = parents[current]
-        path.reverse()
-
-        self.__ans_task = int(distances[end])
-
-        # TODO могут быть несколько путей одинаковой длины
-        # Запоминание Восстановление пути
-        path_str = ''
-        for numb in path:
-            # Замена на значение из словаря
-            path_str += str(self.__num_for_letter[numb]) + ' -> '
-            # path_str += str(numb) + ' -> '
-        path_str = path_str[:-4]
-        self.__solving_task = 'Кратчайший путь имеет вид:\n\n'
-        self.__solving_task += path_str
+        return all_routes, shortest_distance
