@@ -30,7 +30,7 @@ class Generate_Solver_Task4:
         for route, distance in all_routes:
             self.__solving_task += f"Существует маршрут: {' -> '.join(route)} с расстоянием {distance} км\n"
 
-        self.__solving_task += f'\nКратчайший маршрут имеет расстояние {shortest_distance} км.'
+        self.__solving_task += f"\nКратчайший маршрут имеет расстояние {shortest_distance} км."
         self.__ans_task = int(shortest_distance)
 
     # Вспомогательные алгоритмы
