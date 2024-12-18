@@ -25,13 +25,19 @@ class Generate_Solver_Task4:
         # Находим все возможные маршруты
         all_routes, shortest_distance = self.__find_all_routes(self.__matrix_task, 0, num_end)
 
-        # Формируем строку с путями и минимальным расстоянием
-        self.__solving_task = "Все возможные маршруты:\n"
-        for route, distance in all_routes:
-            self.__solving_task += f"Существует маршрут: {' -> '.join(route)} с расстоянием {distance} км\n"
+        # Находим маршрут с минимальной длиной
+        shortest_route = min(all_routes, key=lambda x: x[1])
 
-        self.__solving_task += f"\nКратчайший маршрут имеет расстояние {shortest_distance} км."
-        self.__ans_task = int(shortest_distance)
+        # Формируем строку с путями
+        self.__solving_task = "Все возможные маршруты:\n"
+        for route, _ in all_routes:
+            self.__solving_task += f"Существует маршрут: {' -> '.join(route)}\n"
+
+        # Добавляем самый короткий маршрут в конец
+        self.__solving_task += f"\nСамый короткий маршрут: {' -> '.join(shortest_route[0])}"
+
+        # Не выводим расстояние в решении задачи
+        self.__ans_task = 0  # Здесь можно оставить любое значение, если оно необходимо
 
     # Вспомогательные алгоритмы
     def __generate_matrix(self) -> None:
