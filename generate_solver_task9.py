@@ -139,4 +139,3 @@ class Generate_Solver_Task9:
             ish_resh += '\n' + row
 
         return ish_resh
-

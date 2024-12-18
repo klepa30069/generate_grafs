@@ -113,9 +113,9 @@ class Interface:
 
         # Изменение размера окна
         self.__show_second_block = True
-        self.__height = 500
+        self.__height = 700
         self.__window.setFixedHeight(self.__height)
-        self.__window.move(self.__window.pos().x(), self.__window.pos().y() - 250)
+        self.__window.move(self.__window.pos().x(), self.__window.pos().y() - 400)
 
     def __add_third_block(self) -> None:
         # Создание третьего блока
@@ -133,7 +133,7 @@ class Interface:
 
         # Изменение размера окна
         self.__show_third_block = True
-        self.__height = 700
+        self.__height = 900
         self.__window.setFixedHeight(self.__height)
         # self.__window.move(self.__window.pos().x(), self.__window.pos().y() - 50)
 
@@ -156,7 +156,7 @@ class Interface:
                 self.__solution_display.hide()
 
             # Изменение размера окна
-            self.__height = 500
+            self.__height = 700
             self.__window.setFixedHeight(self.__height)
             # self.__window.move(self.__window.pos().x(), self.__window.pos().y() + 50)
 
@@ -175,7 +175,7 @@ class Interface:
                 graf_pixmap = QPixmap(self.__task.get_image_graf())
                 self.__image_label.setPixmap(graf_pixmap)
             else:
-                table_pixmap = QPixmap(self.__task.get_image_matrix())#матрица смежности
+                table_pixmap = QPixmap(self.__task.get_image_matrix())  # матрица смежности
                 graf_pixmap = QPixmap(self.__task.get_image_graf())
 
                 # Создание нового изображения, чтобы разместить оба изображения
@@ -218,7 +218,7 @@ class Interface:
                 subprocess.run(['open', pdf_path])
             else:  # Для Linux и других систем
                 subprocess.run(['xdg-open', pdf_path])
-            self.__show_popup_message() # Создаём всплывающее сообщение
+            self.__show_popup_message()  # Создаём всплывающее сообщение
         else:
             print(f"Файл {pdf_path} не найден.")
 
