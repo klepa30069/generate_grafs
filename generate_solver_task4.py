@@ -32,8 +32,9 @@ class Generate_Solver_Task4:
 
         # Формируем строку с путями
         self.__solving_task = "Все возможные маршруты:\n"
-        for route, _ in all_routes:
-            self.__solving_task += f"Существует маршрут: {' -> '.join(route)}\n"
+        for route, res in all_routes:
+            if route != shortest_route[0]:
+                self.__solving_task += f"{' -> '.join(route)} = {res}\n"
 
         # Добавляем самый короткий маршрут в конец
         self.__solving_task += f"\nСамый короткий маршрут: {' -> '.join(shortest_route[0])}"
@@ -136,4 +137,4 @@ class Generate_Solver_Task4:
         dfs(start, [self.__num_for_letter[start]], 0, visited)
 
         return all_routes, shortest_distance
- # TODO могут быть несколько путей одинаковой длины
+# TODO могут быть несколько путей одинаковой длины

@@ -20,11 +20,12 @@ class Generate_Solver:
         self.__ans = ans
 
     def __matrix_int_str(self, matrix_task: list[list[int]]) -> None:
-        maxsis = max(matrix_task)
+        maxsis = max(max(matrix_task))
         self.__matrix_task = [['' for _ in range(len(matrix_task))] for _ in range(len(matrix_task))]
         for i in range(len(matrix_task)):
             for j in range(len(matrix_task)):
-                self.__matrix_task[i][j] = '' if matrix_task[i][j] == 0 else '*' if maxsis == 1 else str(matrix_task[i][j])
+                self.__matrix_task[i][j] = '' if matrix_task[i][j] == 0 else '*' if maxsis == 1 else str(
+                    matrix_task[i][j])
 
     def get_text_task(self) -> str:
         return self.__text_task
