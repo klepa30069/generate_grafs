@@ -134,3 +134,4 @@ class Generate_Solver_Task4:
         dfs(start, [self.__num_for_letter[start]], 0, visited)
 
         return all_routes, shortest_distance
+ # TODO могут быть несколько путей одинаковой длины
