@@ -29,6 +29,3 @@ class Controller:
                 result = Task().get_task(type_task)
             self.__tasks9.append(result)
             return result
-
-    def get_theory(self) -> str:
-        pass
