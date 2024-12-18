@@ -75,8 +75,92 @@ class Generate_Solver:
         table_image_path = "image_task_graf.png"
 
         plt.clf()
-        plt.figure(figsize=(4, 2))
+        if type(G) == nx.DiGraph:
+            plt.figure(figsize=(4, 2))
+        else:
+            plt.figure(figsize=(2, 2))
+
+        # TODO изменяем отображение в зависимости от количества вершин
         pos = nx.planar_layout(G)  # Используем расположение для графа
+        # Указываем фиксированное расположение вершин
+        if type(G) == nx.DiGraph:
+            if len(self.__matrix_task) == 7:
+                pos = {
+                    'A': (0, 0),
+                    'B': (2, 3),
+                    'C': (2, -3),
+                    'D': (5, 3),
+                    'E': (5, -3),
+                    'F': (7, 0),
+                    'H': (9, 0)
+                }
+            elif len(self.__matrix_task) == 8:
+                pos = {
+                    'A': (0, 0),
+                    'B': (2, 3),
+                    'C': (2, -3),
+                    'D': (3, 1),
+                    'E': (3, -1),
+
+                    'F': (5, 3),
+                    'H': (5, -3),
+                    'G': (7, 0)
+                }
+            # TODO ?
+            elif len(self.__matrix_task) == 9:
+                pos = {
+                    'A': (0, 0),
+                    'B': (2, 3),
+                    'C': (2, -3),
+                    'D': (3, 0),
+                    'E': (5, 3),
+                    'F': (5, -3),
+                    'H': (6, 0),
+                    'G': (8, 3),
+                    'K': (9, 0)
+                }
+            elif len(self.__matrix_task) == 10:
+                pos = {
+                    'A': (0, 0),
+                    'B': (2, 3),
+                    'C': (2, -3),
+                    'D': (3, 0),
+                    'E': (5, 3),
+                    'F': (5, -3),
+                    'H': (6, 0),
+                    'G': (8, 3),
+                    'K': (8, -3),
+                    'M': (9, 0)
+                }
+            elif len(self.__matrix_task) == 11:
+                pos = {
+                    'A': (0, 0),
+                    'B': (2, 3),
+                    'C': (2, -3),
+                    'D': (3, 1),
+                    'E': (3, -1),
+                    'F': (5, 3),
+                    'H': (5, -3),
+                    'G': (6, 0),
+                    'K': (8, 3),
+                    'M': (8, -3),
+                    'N': (9, 0)
+                }
+            elif len(self.__matrix_task) == 12:
+                pos = {
+                    'A': (0, 0),
+                    'B': (2, 3),
+                    'C': (2, -3),
+                    'D': (3, 1),
+                    'E': (3, -1),
+                    'F': (5, 3),
+                    'H': (5, -3),
+                    'G': (6, 0),
+                    'K': (8, 0),
+                    'M': (10, 3),
+                    'N': (10, -3),
+                    'L': (12, 0),
+                }
         nx.draw(G, pos, with_labels=True, node_size=100, node_color='lightblue', font_size=8, font_weight='bold')
         plt.savefig(table_image_path, bbox_inches="tight", dpi=200)  # Увеличен DPI для чёткого изображения
         plt.close()
