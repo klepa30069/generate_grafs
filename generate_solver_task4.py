@@ -41,31 +41,57 @@ class Generate_Solver_Task4:
 
     # Вспомогательные алгоритмы
     def __generate_matrix(self) -> None:
+        # Максимальное значение веса ребра
         max_weight_edge = 10
-        count_vertices = [4, 5, 6]
-        probabilities_vertices = [0.1, 0.6, 0.3]
-        num_vertices = random.choices(count_vertices, weights=probabilities_vertices, k=1)[0]
 
+        # Введём ограничения по количеству вершин
+        count_vertices = [4, 5, 6]
+        # Вероятности встречи количества вершин в задачах
+        probabilities_vertices = [0.1, 0.6, 0.3]
+
+        # Зададим случайное число вершин
+        num_vertices = random.choices(count_vertices, weights=probabilities_vertices, k=1)[0]
+        # num_vertices = random.randint(min_vertices, max_vertices)
+
+        # Создадим матрицу смежности с нулями
         matrix = [[0] * num_vertices for _ in range(num_vertices)]
 
+        # Для того, чтобы граф был связным
+        # Создадим минимальное остовное дерево
+        # TODO Можно подумать как усложнить условие связности, чтобы вершины были соединены не только 1 -> 2 -> ...
         for i in range(1, num_vertices):
+            # Генерим с небольшим ограничением сверху, чтобы было выгоднее идти через большее количество вершин
             weight = random.randint(1, max_weight_edge - 3)
             matrix[i - 1][i] = weight
             matrix[i][i - 1] = weight
 
+        # TODO Можно подумать, чтобы добавить зависимость и ограничение количества рёбер от количества вершин (ввести счётчик рёбер)
+
+        # OLD solver
+        # Добавляем дополнительные рёбра с вероятностью, чтобы увеличить плотность
         for i in range(num_vertices):
             for j in range(i + 1, num_vertices):
-                if matrix[i][j] == 0 and random.random() < 0.5:
-                    weight = random.randint(2, max_weight_edge)
-                    matrix[i][j] = weight
-                    matrix[j][i] = weight
+                if num_vertices == 4:  # Для 4-х вершин заполняем все рёбра
+                    if matrix[i][j] == 0:
+                        weight = random.randint(2, max_weight_edge)
+                        matrix[i][j] = weight
+                        matrix[j][i] = weight
+                else:
+                    if matrix[i][j] == 0 and random.random() < 0.5:  # Вероятность 50%
+                        weight = random.randint(2, max_weight_edge)
+                        matrix[i][j] = weight
+                        matrix[j][i] = weight
 
+        # Добавляем вероятность соединения первой вершины с последней с большим весом
         if matrix[num_vertices - 1][0] != 0:
             weight = random.randint((max_weight_edge // 2) * num_vertices, max_weight_edge * 3 + 1)
             matrix[num_vertices - 1][0] = weight
             matrix[0][num_vertices - 1] = weight
 
+        # Сохраняем в объект класса сгенерированную матрицу
         self.__matrix_task = matrix
+
+    # TODO Генерирует только из первой в последнюю
 
     def __generate_text_task(self, count: int) -> None:
         str_vertex = ''
