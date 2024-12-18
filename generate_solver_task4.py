@@ -1,3 +1,5 @@
+from typing import Any
+
 from generate_solver import Generate_Solver
 import random
 import heapq
@@ -109,8 +111,7 @@ class Generate_Solver_Task4:
                 f'Определите длину кратчайшего пути между пунктами {self.__num_for_letter[0]} и {self.__num_for_letter[count - 1]} - первым и последним. ' +
                 'Передвигаться можно только по дорогам, протяженность которых указана в таблице.')
 
-    def __find_all_routes(self, graph: list[list[int]], start: int, end: int) -> tuple[
-        list[tuple[list[str], int]], int]:
+    def __find_all_routes(self, graph: list[list[int]], start: int, end: int) -> tuple[list[Any], float]:
         all_routes = []
         shortest_distance = float('inf')
 
@@ -133,7 +134,7 @@ class Generate_Solver_Task4:
                     visited.remove(neighbor)  # Убираем вершину из посещённых
 
         # Инициализация с начальной вершины
-        visited = set([start])  # Множество посещённых вершин
+        visited = {start}  # Множество посещённых вершин
         dfs(start, [self.__num_for_letter[start]], 0, visited)
 
         return all_routes, shortest_distance
