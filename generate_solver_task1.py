@@ -43,9 +43,9 @@ class Generate_Solver_Task1:
 
     def get_task(self) -> Generate_Solver:
         #matrix = self.__get_matrix_task()
-        self.__get_ans_task()
+        #self.__get_ans_task()
         #new_matrix = [[int(x) for x in row] for row in self.__matrix]
-        self.__get_text_task()
+        #self.__get_text_task()
         print((self.__text_task, self.__original_matrix,
                                ['П' + str(i + 1) for i in range(len(self.__original_matrix))], self.__solving_task,
                                self.__anser))
@@ -199,7 +199,8 @@ class Generate_Solver_Task1:
         return self.Task__matrix
 
     def __get_solving_task(self) -> str:
-        #self.__get_ans_task()
+        self.__get_ans_task()
+        print(self.__anser)
         print(self.__type_task)
         num_nodes = len(self.__matrix)
         anser = f'Ответ: '
