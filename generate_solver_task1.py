@@ -5,6 +5,7 @@ from generate_solver import Generate_Solver
 import random
 from collections import Counter
 
+
 class Generate_Solver_Task1:
     __type_task: int
     __points: list
@@ -15,22 +16,23 @@ class Generate_Solver_Task1:
     __matrix: np.ndarray[Any, np.dtype]
     __add_one: bool
     __Counts: Counter
-    __anser: int
+    __answer: int
     __text_task: str
     __solving_task: str
     __send_letter: list
     __senf_matrix: list[list[int]]
-    __anser_type2: int
+    __answer_type2: int
+
     def __init__(self) -> None:
         self.__Counts = None
-        self.__anser = None
+        self.__answer = None
         self.__text_task = None
-        self.__check_anser = None
+        self.__check_answer = None
         self.__send_letter = None
-        self.__anser_type2 = None
+        self.__answer_type2 = None
         self.__original_matrix = None
         self.__type_task = self.__type_task_generate()
-        self.__points = ["A", "B", "C", "D", "E", "F", "G", "H","I","J","K","L"]
+        self.__points = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
         self.__num_letters = random.randint(6, 8)
         self.__letters = self.__random_letter()
         self.__start_point, self.__end_point = self.__random_start_letter()
@@ -42,39 +44,32 @@ class Generate_Solver_Task1:
         self.__senf_matrix = [[int(x) for x in row] for row in self.__matrix]
 
     def get_task(self) -> Generate_Solver:
-        #matrix = self.__get_matrix_task()
-        #self.__get_ans_task()
-        #new_matrix = [[int(x) for x in row] for row in self.__matrix]
-        #self.__get_text_task()
-        print((self.__text_task, self.__original_matrix,
-                               ['П' + str(i + 1) for i in range(len(self.__original_matrix))], self.__solving_task,
-                               self.__anser))
         return Generate_Solver(self.__text_task, self.__original_matrix,
                                ['П' + str(i + 1) for i in range(len(self.__original_matrix))], self.__solving_task,
-                               self.__anser)
+                               self.__answer)
 
     def __get_text_task(self) -> None:
         if self.__type_task == 0:
-            self.__text_task =  (f"На рисунке справа схема дорог Н-ского района изображена в виде графа, " +
-                              "в таблице содержатся сведения о дорогах между населенными пунктами " +
-                              "(звездочка означает, что дорога между соответствующими городами есть)." +
-                              "Так как таблицу и схему рисовали независимо друг от друга, " +
-                              "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
-                              f"Определите номера населенных пунктов {self.__points[self.__start_point]} и {self.__points[self.__end_point]} в таблице. " +
-                              "В ответе запишите числа в порядке возрастания без разделителей.")
+            self.__text_task = (f"На рисунке справа схема дорог Н-ского района изображена в виде графа, " +
+                                "в таблице содержатся сведения о дорогах между населенными пунктами " +
+                                "(звездочка означает, что дорога между соответствующими городами есть)." +
+                                "Так как таблицу и схему рисовали независимо друг от друга, " +
+                                "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе.\n" +
+                                f"Определите номера населенных пунктов {self.__points[self.__start_point]} и {self.__points[self.__end_point]} в таблице. " +
+                                "В ответе запишите числа в порядке возрастания без разделителей.")
         elif self.__type_task == 1:
-            self.__text_task =  ("На рисунке схема дорог изображена в виде графа, " +
-                              "в таблице содержатся сведения о длине этих дорог в километрах. " +
-                              "Поскольку таблицу и схему рисовали независимо друг от друга, " +
-                              "нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
-                              f"Определите длину дороги {self.__points[self.__start_point], self.__points[self.__end_point]}. " +
-                              "В ответе запишите целое число— длину дороги в километрах.")
+            self.__text_task = ("На рисунке схема дорог изображена в виде графа, " +
+                                "в таблице содержатся сведения о длине этих дорог в километрах. " +
+                                "Поскольку таблицу и схему рисовали независимо друг от друга, " +
+                                "нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе.\n" +
+                                f"Определите длину дороги {self.__points[self.__start_point]}, {self.__points[self.__end_point]}. " +
+                                "В ответе запишите целое число — длину дороги в километрах.")
         elif self.__type_task == 2:
-            self.__text_task =  ("На рисунке справа схема дорог Н-ского района изображена в виде графа, " +
-                              "в таблице содержатся сведения о длинах этих дорог (в километрах)." +
-                              "Так как таблицу и схему рисовали независимо друг от друга, " +
-                              "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. \n" +
-                              f"Определите, какова длина дороги из пункта {self.__points[self.__start_point]} в пункт {self.__points[self.__end_point]}. В ответе запишите целое число— так, как оно указано в таблице.")
+            self.__text_task = ("На рисунке справа схема дорог Н-ского района изображена в виде графа, " +
+                                "в таблице содержатся сведения о длинах этих дорог (в километрах)." +
+                                "Так как таблицу и схему рисовали независимо друг от друга, " +
+                                "то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе.\n" +
+                                f"Определите, какова длина дороги из пункта {self.__points[self.__start_point]} в пункт {self.__points[self.__end_point]}. В ответе запишите целое число — так, как оно указано в таблице.")
 
     def __type_task_generate(self) -> int:
         numbers = [0, 1, 2]
@@ -83,28 +78,27 @@ class Generate_Solver_Task1:
         return choice
 
     def __random_letter(self) -> dict:  # Рандомайзер букв в матрице
-        letters = random.sample(self.__points, self.__num_letters)# Выбирает __num_letters уникальных букв
+        letters = random.sample(self.__points, self.__num_letters)  # Выбирает __num_letters уникальных букв
         return dict(enumerate(letters))
 
     def __random_start_letter(self) -> (int, int):  # Рандомайзер стартовых буковок
         numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        print(numbers[:self.__num_letters])
         point1, point2 = random.sample(numbers[:self.__num_letters], 2)
         return point1, point2
 
     def __shuffle_adjacency_matrix(self, adjacency_matrix) -> np.ndarray[Any, np.dtype]:
-        print(self.__start_point, self.__end_point)
         """Перемешивает вершины в матрице смежности, используя NumPy."""
         adjacency_matrix = np.array(adjacency_matrix)
         num_nodes = len(adjacency_matrix)
         permutation = np.random.permutation(num_nodes)  # Случайная перестановка индексов
         shuffled_matrix = adjacency_matrix[:, permutation][permutation,
                           :]  # Применяем перестановку к строкам и столбцам
-        self.__check_anser = [self.__letters[i] for i in permutation]
-        self.__send_letter = self.__check_anser
-        self.__start_point = next((i for i, letter in enumerate(self.__check_anser) if letter == self.__start_letter), None)
-        self.__end_point = next((i for i, letter in enumerate(self.__check_anser) if letter == self.__end_letter), None)
-        print(self.__start_point, self.__end_point)
+        self.__check_answer = [self.__letters[i] for i in permutation]
+        self.__send_letter = self.__check_answer
+        self.__start_point = next((i for i, letter in enumerate(self.__check_answer) if letter == self.__start_letter),
+                                  None)
+        self.__end_point = next((i for i, letter in enumerate(self.__check_answer) if letter == self.__end_letter),
+                                None)
         return shuffled_matrix
 
     def __generate_random___matrix_with_edges(self, num_nodes, num_edges) -> list[list[int]]:
@@ -132,7 +126,7 @@ class Generate_Solver_Task1:
                     # Проверка ребра
                     if (i == self.__start_point or i == self.__end_point) and (
                             neighbor == self.__start_point or neighbor == self.__end_point):
-                        self.__anser_type2 = rand_val
+                        self.__answer_type2 = rand_val
                 edges_added += 1
 
             graph = nx.from_numpy_array(
@@ -148,7 +142,7 @@ class Generate_Solver_Task1:
                 rand_val = random.randint(10, 100)
                 adjacency_matrix[self.__start_point][self.__end_point] = rand_val
                 adjacency_matrix[self.__end_point][self.__start_point] = rand_val
-                self.__anser_type2 = rand_val
+                self.__answer_type2 = rand_val
         self.__original_matrix = adjacency_matrix
         return adjacency_matrix
 
@@ -176,15 +170,15 @@ class Generate_Solver_Task1:
         all_el = []
         result = False
         for el in range(self.__num_letters):
-            sum = 0
+            summ = 0
             for deep_el in matrix[el]:
-                sum += deep_el
-            all_el.append(sum)
+                summ += deep_el
+            all_el.append(summ)
         self.__add_counter(all_el)
         for count in self.__Counts.values():
             if count == 1:
                 result = True
-        if result == False:
+        if not result:
             matrix = self.__add_node_list(matrix)
             self.__add_one = True
             self.__letters[self.__num_letters] = "I"
@@ -192,7 +186,7 @@ class Generate_Solver_Task1:
 
     def __get_matrix_task(self) -> np.ndarray[Any, np.dtype]:
         num_nodes = self.__num_letters
-        num_edges = (3 * num_nodes/2)
+        num_edges = (3 * num_nodes / 2)
         adjacency_matrix = self.__generate_random___matrix_with_edges(num_nodes, num_edges)
         self.__check_rows(adjacency_matrix)
         self.Task__matrix = self.__shuffle_adjacency_matrix(adjacency_matrix)
@@ -200,36 +194,33 @@ class Generate_Solver_Task1:
 
     def __get_solving_task(self) -> str:
         self.__get_ans_task()
-        print(self.__anser)
-        print(self.__type_task)
         num_nodes = len(self.__matrix)
-        anser = f'Ответ: '
+        answer = f'Ответ:\n'
         if self.__type_task != 2:
             for i in range(num_nodes):
-                anser += "Вершина {} = П{}. ".format(self.__points[i], i+1)
-            anser += "Ответ: {}".format(self.__anser)
+                answer += "Вершина {} = П{}.\n".format(self.__points[i], i + 1)
             self.__get_text_task()
         else:
             for i in range(len(self.__original_matrix)):
                 for j in range(len(self.__original_matrix[i])):
-                    if self.__original_matrix[i][j] == self.__anser:
+                    if self.__original_matrix[i][j] == self.__answer:
                         self.__start_point = i
                         self.__end_point = j
                         break
-            anser += "Вершина {} = П{}. Вершина {} = П{}. Расстояние между ними равно {}".format(self.__points[self.__start_point], self.__start_point+1,
-                                                                                                self.__points[self.__end_point], self.__end_point+1,
-                                                                                                self.__anser)
+            answer += "Вершина {} = П{}.\nВершина {} = П{}.".format(
+                self.__points[self.__start_point], self.__start_point + 1,
+                self.__points[self.__end_point], self.__end_point + 1)
             self.__get_text_task()
-        return anser
+        return answer
 
     def __get_ans_task(self) -> None:
         if self.__type_task == 0:
-            self.__anser = int(str(self.__start_point) + str(self.__end_point)) + 11
+            self.__answer = int(str(self.__start_point) + str(self.__end_point)) + 11
         elif self.__type_task == 1:
             if self.__original_matrix[self.__start_point][self.__end_point] == 0:
                 rand_val = random.randint(10, 100)
                 self.__original_matrix[self.__start_point][self.__end_point] = rand_val
                 self.__original_matrix[self.__end_point][self.__start_point] = rand_val
-            self.__anser = self.__original_matrix[self.__end_point][self.__start_point]
+            self.__answer = self.__original_matrix[self.__end_point][self.__start_point]
         elif self.__type_task == 2:
-            self.__anser = self.__anser_type2
+            self.__answer = self.__answer_type2
