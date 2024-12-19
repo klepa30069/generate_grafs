@@ -123,16 +123,18 @@ class Generate_Solver_Task9:
             mass_resh[j] = str(self.__num_for_letter[j]) + ' = ' + mass_resh[j] + ' = '
 
         for i in range(len(mass_count_path)):
-            for j in range(1, len(mass_count_path)):
+            for j in range(1, len(mass_count_path) - 1):
                 if matrix[i][j] == 1:
                     if mass_resh[j][-2] == '=':
                         mass_resh[j] += str(mass_count_path[i])
                     else:
                         mass_resh[j] += ' + ' + str(mass_count_path[i])
 
-        for j in range(1, len(mass_count_path)):
+        for j in range(1, len(mass_count_path) - 1):
             if mass_resh[j][-3] == '+' or mass_resh[j][-4] == '+' or mass_resh[j][-5] == '+':
                 mass_resh[j] += ' = ' + str(mass_count_path[j])
+
+        mass_resh[len(mass_resh) - 1] += '?'
 
         for row in mass_resh:
             # print(row)
