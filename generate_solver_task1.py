@@ -215,7 +215,10 @@ class Generate_Solver_Task1:
 
     def __get_ans_task(self) -> None:
         if self.__type_task == 0:
-            self.__answer = int(str(self.__start_point) + str(self.__end_point)) + 11
+            if self.__start_point < self.__end_point:
+                self.__answer = int(str(self.__start_point) + str(self.__end_point)) + 11
+            else:
+                self.__answer = int(str(self.__end_point) + str(self.__start_point)) + 11
         elif self.__type_task == 1:
             if self.__original_matrix[self.__start_point][self.__end_point] == 0:
                 rand_val = random.randint(10, 100)
